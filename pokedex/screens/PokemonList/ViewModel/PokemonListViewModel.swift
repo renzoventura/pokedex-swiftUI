@@ -9,50 +9,60 @@ import Foundation
 
 
 class PokemonListViewModel: ObservableObject {
-    @Published var pokemonList: PokemonList?
-    var listOfUrls : [URL?] = [];
-    
-    @Published var pokemonDetailList: [PokemonModel?] = []
     let api = PokemonApi()
-
     
-    func getPokemonList() async {
-        await api.getListOfPokemon() { data, error in
+    @Published var pokemonDetailList: [PokemonModel] = []
+    
+    func getListOfPokemonUrls()  {
+        api.getListOfPokemon() { data, error in
             if let data = data {
                 DispatchQueue.main.async {
-                    self.pokemonList = data;
+                    
+                    self.getListOfPokemonDetails(pokemonListPassed: data)
                 }
-            } else if error != nil {
-                print("SOMETHING WENT WRONG!");
-            }
+            } else if error != nil {}
         }
+        
+        
     }
     
-    func getListOfPokemon() async  {
-        let pokemonURLs = listOfUrls;
+    func getListOfPokemonDetails(pokemonListPassed: PokemonList)   {
+        let pokemonURLs = pokemonListPassed.results.map { $0.url };
+        print("CALLING THE LIST OF POKEMON!!! \(String(describing: pokemonURLs.count))")
+        
+        
         var pokemonList: [PokemonModel] = []
+        
         let dispatchGroup = DispatchGroup()
         let queue = DispatchQueue.global()
-        for url in pokemonURLs {
+        for url in pokemonURLs  {
             dispatchGroup.enter()
             
-            await api.getPokemonDetail(pokemonUrl: url?.absoluteString ?? "") { data, error in
-                defer {
-                    dispatchGroup.leave()
-                }
+            api.getPokemonDetail(pokemonUrl: url) { data, error in
+                
                 if let data = data {
+                    print(data.name)
                     pokemonList.append(data);
+                    
                 } else if error != nil {
                     print("Something went wrong for URL")
                 }
+                dispatchGroup.leave()
             }
         }
         
+        print("THIS IS IT! \(String(describing: pokemonListPassed.count))")
+        
+        print("------------------------0");
         dispatchGroup.notify(queue: queue) {
+            
+            print("------------------------1");
             if !pokemonList.isEmpty {
-                print("IT WORKED!!!");
+                
+                print("------------------------2");
                 self.pokemonDetailList = pokemonList;
             } else {
+                print("------------------------3");
             }
         }
     }

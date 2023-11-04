@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct PokemonListScreen: View {
-    @EnvironmentObject var pokemonController: PokemonListViewModel
+    @EnvironmentObject var vm: PokemonListViewModel
 
     var body: some View {
         NavigationView {
-            List(pokemonController.pokemonList?.results ?? [], id: \.id) { pokemon in
+            List(vm.pokemonDetailList, id: \.id) { pokemon in
                 NavigationLink(destination: Text("Details for \(pokemon.name)")) {
                     Text(pokemon.name.capitalized)
                 }
             }
-            .task {
-                await pokemonController.getPokemonList()
+            .onAppear() {
+                 vm.getListOfPokemonUrls()
             }
             .navigationTitle("Pokédex")
         }

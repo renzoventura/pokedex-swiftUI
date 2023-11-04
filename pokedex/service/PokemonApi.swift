@@ -12,8 +12,8 @@ struct PokemonApi {
     let url : String = "https://pokeapi.co/api/v2/pokemon?limit=151";
     
     
-    func getListOfPokemon(completion: @escaping (PokemonList?, Error?) -> Void) async  {
-        await performAPICall(passedUrl: url) { data, error in
+    func getListOfPokemon(completion: @escaping (PokemonList?, Error?) -> Void)   {
+         performAPICall(passedUrl: url) { data, error in
             if let data = data {
                 if let decodedData = try? JSONDecoder().decode(PokemonList.self, from: data) {
                     completion(decodedData, nil)
@@ -25,8 +25,8 @@ struct PokemonApi {
         }
     }
 
-    func getPokemonDetail(pokemonUrl: String, completion: @escaping (PokemonModel?, Error?) -> Void) async  {
-        await performAPICall(passedUrl: pokemonUrl) { data, error in
+    func getPokemonDetail(pokemonUrl: String, completion: @escaping (PokemonModel?, Error?) -> Void)   {
+         performAPICall(passedUrl: pokemonUrl) { data, error in
             if let data = data {
                 if let decodedData = try? JSONDecoder().decode(PokemonModel.self, from: data) {
                     completion(decodedData, nil)
@@ -42,7 +42,7 @@ struct PokemonApi {
     
 
     
-    func performAPICall(passedUrl: String, completion: @escaping (Data?, Error?) -> Void) async {
+    func performAPICall(passedUrl: String, completion: @escaping (Data?, Error?) -> Void)  {
         if let url = URL(string: passedUrl) {
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 if let error = error {
