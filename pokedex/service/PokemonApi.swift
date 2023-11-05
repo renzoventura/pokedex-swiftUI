@@ -9,7 +9,7 @@ import Foundation
 
 struct PokemonApi {
     
-    let url : String = "https://pokeapi.co/api/v2/pokemon?limit=151";
+    let url : String = "https://pokeapi.co/api/v2/pokemon?limit=20";
     
     
     func getListOfPokemon(completion: @escaping (PokemonList?, Error?) -> Void)   {

@@ -6,64 +6,49 @@
 //
 
 import Foundation
+import Combine
 
 
 class PokemonListViewModel: ObservableObject {
     let api = PokemonApi()
+    private var cancellables: Set<AnyCancellable> = []
     
     @Published var pokemonDetailList: [PokemonModel] = []
     
     func getListOfPokemonUrls()  {
         api.getListOfPokemon() { data, error in
             if let data = data {
-                DispatchQueue.main.async {
-                    
-                    self.getListOfPokemonDetails(pokemonListPassed: data)
-                }
+                self.getListOfPokemonDetails(pokemonListPassed: data)
             } else if error != nil {}
         }
-        
-        
     }
     
     func getListOfPokemonDetails(pokemonListPassed: PokemonList)   {
         let pokemonURLs = pokemonListPassed.results.map { $0.url };
-        print("CALLING THE LIST OF POKEMON!!! \(String(describing: pokemonURLs.count))")
-        
-        
-        var pokemonList: [PokemonModel] = []
-        
-        let dispatchGroup = DispatchGroup()
-        let queue = DispatchQueue.global()
-        for url in pokemonURLs  {
-            dispatchGroup.enter()
-            
-            api.getPokemonDetail(pokemonUrl: url) { data, error in
-                
-                if let data = data {
-                    print(data.name)
-                    pokemonList.append(data);
-                    
-                } else if error != nil {
-                    print("Something went wrong for URL")
+        let publishers = pokemonURLs.map { url in
+            URLSession.shared.dataTaskPublisher(for: URL(string: url)!)
+                .map(\.data)
+                .decode(type: PokemonModel.self, decoder: JSONDecoder())
+                .eraseToAnyPublisher()
+        }
+        Publishers.MergeMany(publishers) // Merge the individual publishers
+            .collect()
+            .receive(on: DispatchQueue.main) // Make sure to update UI on the main thread
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("API request failed: \(error)")
                 }
-                dispatchGroup.leave()
+            } receiveValue: { results in
+                // Handle the received data
+                print(results.count)
+                DispatchQueue.main.async {
+                    self.pokemonDetailList = results
+                    self.pokemonDetailList.sort { $1.id > $0.id }
+                }
             }
-        }
-        
-        print("THIS IS IT! \(String(describing: pokemonListPassed.count))")
-        
-        print("------------------------0");
-        dispatchGroup.notify(queue: queue) {
-            
-            print("------------------------1");
-            if !pokemonList.isEmpty {
-                
-                print("------------------------2");
-                self.pokemonDetailList = pokemonList;
-            } else {
-                print("------------------------3");
-            }
-        }
+            .store(in: &cancellables)
     }
 }

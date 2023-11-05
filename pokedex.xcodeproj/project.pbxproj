@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C914FED62AF68ABA0043A20B /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = C914FED52AF68ABA0043A20B /* URLImage */; };
+		C914FED82AF68ABA0043A20B /* URLImageStore in Frameworks */ = {isa = PBXBuildFile; productRef = C914FED72AF68ABA0043A20B /* URLImageStore */; };
+		C914FEDA2AF77AB90043A20B /* PokemonTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C914FED92AF77AB90043A20B /* PokemonTile.swift */; };
+		C914FEDC2AF77EC90043A20B /* ElementTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C914FEDB2AF77EC90043A20B /* ElementTile.swift */; };
+		C914FEDF2AF790ED0043A20B /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C914FEDE2AF790ED0043A20B /* Utilities.swift */; };
+		C914FEE12AF792A90043A20B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C914FEE02AF792A90043A20B /* Constants.swift */; };
 		C960CB312AEB9ACA005A2B45 /* pokedexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960CB302AEB9ACA005A2B45 /* pokedexApp.swift */; };
 		C960CB332AEB9ACA005A2B45 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960CB322AEB9ACA005A2B45 /* ContentView.swift */; };
 		C960CB352AEB9ACA005A2B45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C960CB342AEB9ACA005A2B45 /* Assets.xcassets */; };
@@ -19,6 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C914FED92AF77AB90043A20B /* PokemonTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonTile.swift; sourceTree = "<group>"; };
+		C914FEDB2AF77EC90043A20B /* ElementTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementTile.swift; sourceTree = "<group>"; };
+		C914FEDE2AF790ED0043A20B /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		C914FEE02AF792A90043A20B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C960CB2D2AEB9ACA005A2B45 /* pokedex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pokedex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C960CB302AEB9ACA005A2B45 /* pokedexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pokedexApp.swift; sourceTree = "<group>"; };
 		C960CB322AEB9ACA005A2B45 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -36,12 +46,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C914FED82AF68ABA0043A20B /* URLImageStore in Frameworks */,
+				C914FED62AF68ABA0043A20B /* URLImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C914FEDD2AF790DF0043A20B /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				C914FEDE2AF790ED0043A20B /* Utilities.swift */,
+				C914FEE02AF792A90043A20B /* Constants.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
 		C960CB242AEB9ACA005A2B45 = {
 			isa = PBXGroup;
 			children = (
@@ -61,6 +82,7 @@
 		C960CB2F2AEB9ACA005A2B45 /* pokedex */ = {
 			isa = PBXGroup;
 			children = (
+				C914FEDD2AF790DF0043A20B /* utils */,
 				C960CB3F2AEB9AFB005A2B45 /* screens */,
 				C960CB3E2AEB9AE9005A2B45 /* service */,
 				C960CB302AEB9ACA005A2B45 /* pokedexApp.swift */,
@@ -119,6 +141,8 @@
 		C960CB492AEB9C5A005A2B45 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				C914FED92AF77AB90043A20B /* PokemonTile.swift */,
+				C914FEDB2AF77EC90043A20B /* ElementTile.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -178,6 +202,10 @@
 			dependencies = (
 			);
 			name = pokedex;
+			packageProductDependencies = (
+				C914FED52AF68ABA0043A20B /* URLImage */,
+				C914FED72AF68ABA0043A20B /* URLImageStore */,
+			);
 			productName = pokedex;
 			productReference = C960CB2D2AEB9ACA005A2B45 /* pokedex.app */;
 			productType = "com.apple.product-type.application";
@@ -206,6 +234,9 @@
 				Base,
 			);
 			mainGroup = C960CB242AEB9ACA005A2B45;
+			packageReferences = (
+				C914FED42AF68ABA0043A20B /* XCRemoteSwiftPackageReference "url-image" */,
+			);
 			productRefGroup = C960CB2E2AEB9ACA005A2B45 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -232,13 +263,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C914FEDC2AF77EC90043A20B /* ElementTile.swift in Sources */,
 				C960CB332AEB9ACA005A2B45 /* ContentView.swift in Sources */,
+				C914FEDF2AF790ED0043A20B /* Utilities.swift in Sources */,
 				C960CB482AEB9BC5005A2B45 /* PokemonListModel.swift in Sources */,
 				C960CB522AEB9D0A005A2B45 /* PokemonDetailModel.swift in Sources */,
 				C960CB312AEB9ACA005A2B45 /* pokedexApp.swift in Sources */,
+				C914FEDA2AF77AB90043A20B /* PokemonTile.swift in Sources */,
 				C960CB4B2AEB9C67005A2B45 /* PokemonListViewModel.swift in Sources */,
 				C960CB542AEF1654005A2B45 /* PokemonApi.swift in Sources */,
 				C960CB442AEB9B84005A2B45 /* PokemonListScreen.swift in Sources */,
+				C914FEE12AF792A90043A20B /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +472,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C914FED42AF68ABA0043A20B /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C914FED52AF68ABA0043A20B /* URLImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C914FED42AF68ABA0043A20B /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
+		};
+		C914FED72AF68ABA0043A20B /* URLImageStore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C914FED42AF68ABA0043A20B /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImageStore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C960CB252AEB9ACA005A2B45 /* Project object */;
 }
