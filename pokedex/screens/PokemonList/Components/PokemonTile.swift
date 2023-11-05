@@ -15,7 +15,10 @@ struct PokemonTile: View {
                          .ignoresSafeArea()
             HStack {
                 VStack (alignment: .leading){
-                    Text("\(String(pokemon.id)) \(String(pokemon.name.capitalized))")
+                    Text("\(String(pokemon.id)). \(String(pokemon.name.capitalized))")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+
                     ElementTileContainer(elements: pokemon.types)
                 }
                 Spacer()

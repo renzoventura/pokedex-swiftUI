@@ -21,9 +21,11 @@ struct ElementTileContainer: View {
 struct ElementTile: View {
     var type : Species
     var body: some View {
-        Text(type.name)
+        Text(type.name.capitalized)
             .foregroundColor(.white)
             .padding(.vertical, 5)
+            .font(.body)
+            .fontWeight(.bold)
             .padding(.horizontal, 10)
             .background(
                 RoundedRectangle(cornerRadius: 20)
