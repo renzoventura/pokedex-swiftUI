@@ -21,16 +21,27 @@ struct ElementTileContainer: View {
 struct ElementTile: View {
     var type : Species
     var body: some View {
-        Text(type.name.capitalized)
-            .foregroundColor(.white)
-            .padding(.vertical, 5)
-            .font(.body)
-            .fontWeight(.bold)
-            .padding(.horizontal, 10)
-            .background(
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(getColorForType(type: type.name)
-                         )
-            )
+        HStack {
+            ZStack {
+                Ellipse()
+                    .fill(Color.white)
+                    .frame(width: 25, height: 25)
+                Image(getElementImage(type: type.name))
+                    .resizable()
+                    .frame(width: 13, height: 13)
+            }
+            Text(type.name.capitalized)
+                .foregroundColor(.white)
+                .font(.body)
+                .fontWeight(.bold)
+            
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 5)
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(getColorForType(type: type.name)
+                     )
+        )
     }
 }
