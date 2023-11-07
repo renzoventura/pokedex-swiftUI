@@ -22,20 +22,8 @@ struct PokemonTile: View {
                     ElementTileContainer(elements: pokemon.types)
                 }
                 Spacer()
-                AsyncImage(url: URL(string: pokemon.sprites.frontDefault)) { phase in
-                    switch phase {
-                    case .empty:
-                        ProgressView()
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .frame(width: 100)
-                    case .failure(let error):
-                        Text("Failed to load image: \(error.localizedDescription)")
-                    @unknown default:
-                        Text("Unknown state")
-                    }
-                }
+                PokemonTileImageContainer(pokemon: pokemon)
+                
             }
             .padding(.vertical, 2)
             .padding(.leading, 20)

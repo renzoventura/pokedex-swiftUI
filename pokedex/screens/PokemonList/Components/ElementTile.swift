@@ -22,14 +22,7 @@ struct ElementTile: View {
     var type : Species
     var body: some View {
         HStack {
-            ZStack {
-                Ellipse()
-                    .fill(Color.white)
-                    .frame(width: 25, height: 25)
-                Image(getElementImage(type: type.name))
-                    .resizable()
-                    .frame(width: 13, height: 13)
-            }
+            ElementIcon(type: type.name)
             Text(type.name.capitalized)
                 .foregroundColor(.white)
                 .font(.body)
