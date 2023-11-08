@@ -10,7 +10,7 @@ import SwiftUI
 struct ElementTileContainer: View {
     var elements : [TypeElement]
     var body: some View {
-        HStack {
+        HStack (spacing: 5)  {
             ForEach(elements, id: \.id) { index in
                 ElementTile(type: index.type)
             }
@@ -21,12 +21,12 @@ struct ElementTileContainer: View {
 struct ElementTile: View {
     var type : Species
     var body: some View {
-        HStack {
+        HStack(spacing: 5) {
             ElementIcon(type: type.name)
             Text(type.name.capitalized)
                 .foregroundColor(.white)
                 .font(.body)
-                .fontWeight(.bold)
+                .fontWeight(.semibold)
             
         }
         .padding(.horizontal, 10)
