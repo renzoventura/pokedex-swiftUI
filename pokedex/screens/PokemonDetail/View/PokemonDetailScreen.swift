@@ -10,6 +10,8 @@ import SwiftUI
 struct PokemonDetailScreen: View {
     var pokemon : PokemonModel
     var body: some View {
-        Text("Hello, World!")
+        PokemonImage(pokemonImage: pokemon.sprites.other.home.frontDefault)
+            .frame(width: 400, height: 400)
+    
     }
 }

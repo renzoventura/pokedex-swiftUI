@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct PokemonImage: View {
-    
     var pokemonImage: String
     var body: some View {
         AsyncImage(url: URL(string: pokemonImage)) { phase in
@@ -18,7 +17,6 @@ struct PokemonImage: View {
             case .success(let image):
                 image
                     .resizable()
-                    .frame(width: 100)
             case .failure(let error):
                 Text("Failed to load image: \(error.localizedDescription)")
             @unknown default:

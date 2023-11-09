@@ -28,6 +28,14 @@ struct PokemonTile: View {
             .padding(.vertical, 2)
             .padding(.leading, 20)
         }.cornerRadius(20)
+            .frame(
+                height: 120
+//                  minWidth: 0,
+//                  maxWidth: .infinity,
+//                  minHeight: 0,
+//                  maxHeight: .infinity,
+//                  alignment: .topLeading
+                )
     }
 }
 

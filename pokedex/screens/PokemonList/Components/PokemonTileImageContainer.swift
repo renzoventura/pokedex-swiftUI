@@ -13,10 +13,12 @@ struct PokemonTileImageContainer: View {
         ZStack {
             Image(getElementImage(type: pokemon.types.first?.type.name ?? ""))
                 .resizable()
-                .frame(width: 70, height: 70)
                 .padding()
             PokemonImage(pokemonImage: pokemon.sprites.frontDefault)
         }
+        .frame(
+            width: 120
+            )
         .background(getColorForTypeTransparent(type: pokemon.types.first?.type.name))
         .cornerRadius(20)
     }
