@@ -14,20 +14,27 @@ struct PokemonListScreen: View {
     
     var body: some View {
         NavigationView {
-            List(vm.pokemonDetailList, id: \.id) { pokemon in
-                PokemonTile(pokemon: pokemon)
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
-                    .overlay(
-                        NavigationLink("", destination: PokemonDetailScreen(pokemon: pokemon))
-                            .opacity(0)
-                    )
-            }
-            .onAppear() {
-                vm.getListOfPokemonUrls()
-            }
-            .navigationTitle("Pokédex")
-        }.listStyle(.plain)
+            VStack {
+                if vm.isLoading {
+                    // Show loading indicator
+                    ProgressView("Loading...")
+                } else {
+                    List(vm.pokemonDetailList, id: \.id) { pokemon in
+                        PokemonTile(pokemon: pokemon)
+                            .listRowBackground(Color.clear)
+                            .listRowSeparator(.hidden)
+                            .overlay(
+                                NavigationLink("", destination: PokemonDetailScreen(pokemon: pokemon))
+                                    .opacity(0)
+                            )
+                    }
+                    .onAppear() {
+                        vm.getListOfPokemonUrls()
+                    }
+                    .navigationTitle("Pokédex")
+                }
+            }.listStyle(.plain)
+        }
     }
     
     

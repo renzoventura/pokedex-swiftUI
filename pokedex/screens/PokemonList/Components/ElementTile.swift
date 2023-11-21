@@ -7,16 +7,6 @@
 
 import SwiftUI
 
-struct ElementTileContainer: View {
-    var elements : [TypeElement]
-    var body: some View {
-        HStack (spacing: 5)  {
-            ForEach(elements, id: \.id) { index in
-                ElementTile(type: index.type)
-            }
-        }
-    }
-}
 
 struct ElementTile: View {
     var type : Species

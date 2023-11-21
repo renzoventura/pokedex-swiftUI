@@ -14,8 +14,12 @@ class PokemonListViewModel: ObservableObject {
     private var cancellables: Set<AnyCancellable> = []
     
     @Published var pokemonDetailList: [PokemonModel] = []
+    @Published var isLoading: Bool = false // Added isLoading property
     
     func getListOfPokemonUrls()  {
+        DispatchQueue.main.async {
+            self.isLoading = true // Set isLoading to true before making the API call
+        }
         api.getListOfPokemon() { data, error in
             if let data = data {
                 self.getListOfPokemonDetails(pokemonListPassed: data)
@@ -37,9 +41,10 @@ class PokemonListViewModel: ObservableObject {
             .sink { completion in
                 switch completion {
                 case .finished:
-                    break
+                    self.isLoading = false // Set isLoading to false once the API call is complete
                 case .failure(let error):
                     print("API request failed: \(error)")
+                    self.isLoading = false // Set isLoading to false in case of failure
                 }
             } receiveValue: { results in
                 // Handle the received data
